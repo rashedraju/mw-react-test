@@ -9,11 +9,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "bootstrap": "^5.2.0",
+    "bootstrap": "^5.2.1",
+    "install": "^0.13.0",
     "node-sass": "^7.0.1",
+    "npm": "^8.19.2",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.3.0",
+    "react-router": "^6.4.0",
+    "react-router-dom": "^6.4.0",
     "sass": "^1.54.9"
   },
   "devDependencies": {
