@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { useSearchParams } from 'react-router-dom';
+import ModalA from './Modals/A'
+import ModalB from './Modals/B'
+import ModalC from './Modals/C'
 
 const Problem2 = () => {
     const [show, setShow] = useState();
@@ -10,33 +13,7 @@ const Problem2 = () => {
     const [modalItem, setModalItem] = useState();
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const [contacts, setContacts] = useState([
-        {
-            id: 1,
-            phone: '0128552585636354',
-            country: 'US',
-        },
-        {
-            id: 2,
-            phone: '565644565342145',
-            country: 'EU',
-        },
-        {
-            id: 3,
-            phone: '46543536645645',
-            country: 'US',
-        },
-        {
-            id: 4,
-            phone: '56456456385463',
-            country: 'BN',
-        },
-        {
-            id: 6,
-            phone: '45456456456456',
-            country: 'US',
-        },
-    ]);
+    const [contacts, setContacts] = useState([]);
 
     const getContacts = () => {
         let renderableContact = null;
@@ -64,7 +41,8 @@ const Problem2 = () => {
 
                 <div className='d-flex justify-content-center gap-3'>
                     <button
-                        className='btn btn-lg btn-outline-primary'
+                        className='btn'
+                        style={{ backgroundColor: "#46139f", color: "#fff" }}
                         type='button'
                         onClick={() => {
                             setSearchParams({
@@ -75,8 +53,9 @@ const Problem2 = () => {
                         All Contacts
                     </button>
                     <button
-                        className='btn btn-lg btn-outline-warning'
+                        className='btn'
                         type='button'
+                        style={{ background: "#ff7f50", color: "#000" }}
                         onClick={() => {
                             setSearchParams({
                                 modal: 'two',
@@ -88,154 +67,10 @@ const Problem2 = () => {
                 </div>
             </div>
             <>
-                <Modal show={show === 'modal_one'}>
-                    <Modal.Header>
-                        <Modal.Title>Modal one</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <table className='table table-striped '>
-                            <thead>
-                                <tr>
-                                    <th scope='col'>id</th>
-                                    <th scope='col'>Contact</th>
-                                    <th scope='col'>Country</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {getContacts()?.map((item) => (
-                                    <tr
-                                        onClick={() => {
-                                            setShow('modal_three');
-                                            setModalItem(item);
-                                        }}>
-                                        <td>{item.id}</td>
-                                        <td>{item.phone}</td>
-                                        <td>{item.country}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Form.Label>Only even</Form.Label>
-                        <Form.Check
-                            checked={check}
-                            aria-label='Only even'
-                            onClick={() => setCheck((prev) => !prev)}
-                        />
-                        <Button
-                            variant='secondary'
-                            onClick={() => setShow('modal_one')}>
-                            All Contacts
-                        </Button>
-                        <Button
-                            variant='primary'
-                            onClick={() => setShow('modal_two')}>
-                            US Contacts
-                        </Button>
-                        <Button variant='primary' onClick={() => setShow(null)}>
-                            Close
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
-
-                <Modal show={show === 'modal_two'}>
-                    <Modal.Header>
-                        <Modal.Title>Modal two</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <table className='table table-striped '>
-                            <thead>
-                                <tr>
-                                    <th scope='col'>id</th>
-                                    <th scope='col'>Contact</th>
-                                    <th scope='col'>Country</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {getContacts()?.map((item) => (
-                                    <tr
-                                        onClick={() => {
-                                            setShow('modal_three');
-                                            setModalItem(item);
-                                        }}>
-                                        <td>{item.id}</td>
-                                        <td>{item.phone}</td>
-                                        <td>{item.country}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Form.Label>Only even</Form.Label>
-                        <Form.Check
-                            checked={check}
-                            aria-label='Only even'
-                            onClick={() => setCheck((prev) => !prev)}
-                        />
-                        <Button
-                            variant='secondary'
-                            onClick={() => setShow('modal_one')}>
-                            All Contacts
-                        </Button>
-                        <Button
-                            variant='primary'
-                            onClick={() => setShow('modal_two')}>
-                            US Contacts
-                        </Button>
-                        <Button variant='primary' onClick={() => setShow(null)}>
-                            Close
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
-
-                <Modal show={show === 'modal_three'}>
-                    <Modal.Header>
-                        <Modal.Title>Modal Three</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <table className='table table-striped '>
-                            <thead>
-                                <tr>
-                                    <th scope='col'>id</th>
-                                    <th scope='col'>Contact</th>
-                                    <th scope='col'>Country</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {modalItem && (
-                                    <tr>
-                                        <td>{modalItem.id}</td>
-                                        <td>{modalItem.phone}</td>
-                                        <td>{modalItem.country}</td>
-                                    </tr>
-                                )}
-                            </tbody>
-                        </table>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Form.Label>Only even</Form.Label>
-                        <Form.Check
-                            checked={check}
-                            aria-label='Only even'
-                            onClick={() => setCheck((prev) => !prev)}
-                        />
-                        <Button
-                            variant='secondary'
-                            onClick={() => setShow('modal_one')}>
-                            All Contacts
-                        </Button>
-                        <Button
-                            variant='primary'
-                            onClick={() => setShow('modal_two')}>
-                            US Contacts
-                        </Button>
-                        <Button variant='primary' onClick={() => setShow(null)}>
-                            Close
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
+                
+                <ModalA show={show === 'modal_one'} setShow={setShow} setModalItem={setModalItem} />
+                <ModalB show={show === 'modal_two'} setShow={setShow} setModalItem={setModalItem} />
+                <ModalC show={show === 'modal_three'} setShow={setShow} modalItem={modalItem} />
             </>
         </div>
     );
